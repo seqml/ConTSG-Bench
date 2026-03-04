@@ -1,7 +1,7 @@
 # ConTSG-Bench: A Unified Benchmark for Conditional Time Series Generation
 
 [![arXiv](https://img.shields.io/badge/arXiv-2506.XXXXX-B31B1B?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2506.XXXXX)
-[![HuggingFace Space](https://img.shields.io/badge/HuggingFace-Space-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/spaces/YOUR_ORG/contsg-bench)
+[![HuggingFace Space](https://img.shields.io/badge/HuggingFace-Space-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/spaces/mldi-lab/ConTSG-Bench-Leaderboard)
 [![HuggingFace Dataset](https://img.shields.io/badge/HuggingFace-Dataset-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/datasets/mldi-lab/ConTSG-Bench-Datasets)
 [![HuggingFace Checkpoints](https://img.shields.io/badge/HuggingFace-Checkpoints-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/mldi-lab/ConTSG-Bench-Checkpoints)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -118,7 +118,7 @@ ConTSG-Bench benchmarks **11 representative generation models** spanning all thr
 - **Good generation fidelity does not guarantee condition adherence.** Some models perform consistently well on both dimensions, while others show significant rank differences, confirming the need to evaluate these two aspects separately.
 - **Text conditioning offers the highest performance ceiling but also the largest variance.** Text-conditioned models span the full range from top to bottom, whereas attribute-conditioned methods cluster in the upper-middle tier.
 
-**Explore the full results on our interactive leaderboard:** **[ConTSG-Bench Leaderboard](https://huggingface.co/spaces/YOUR_ORG/contsg-bench)**
+**Explore the full results on our interactive leaderboard:** **[ConTSG-Bench Leaderboard](https://huggingface.co/spaces/mldi-lab/ConTSG-Bench-Leaderboard)**
 
 ## Installation
 
