@@ -307,7 +307,7 @@ If you find ConTSG-Bench useful in your research, please cite our paper:
 ```bibtex
 @article{contsgbench2025,
   title={ConTSG-Bench: A Unified Benchmark for Conditional Time Series Generation},
-  author={Anonymous},
+  author={Shaocheng Lan and Shuqi Gu and Zhangzhi Xiong and Kan Ren},
   journal={arXiv preprint},
   year={2025}
 }
