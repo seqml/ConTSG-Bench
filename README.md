@@ -297,7 +297,7 @@ CI runs tests and markdown link checks on pull requests.
 ## Contact
 
 - Shaocheng Lan: lanshch2024@shanghaitech.edu.cn
-- Shuqi Gu: gushq@shanghaitech.edu.cn
+- Shuqi Gu: gushq2024@shanghaitech.edu.cn
 - Zhangzhi Xiong: xiongzhzh2023@shanghaitech.edu.cn
 
 ## Citation
