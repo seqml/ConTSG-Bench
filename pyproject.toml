@@ -7,7 +7,7 @@ name = "contsg"
 version = "0.1.0"
 description = "Conditional Time Series Generation Benchmark"
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
 requires-python = ">=3.10"
 authors = [
     {name = "ConTSG Team"}
@@ -16,7 +16,6 @@ keywords = ["time-series", "generation", "benchmark", "deep-learning", "pytorch"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -68,9 +67,9 @@ full = [
 contsg = "contsg.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/your-org/contsg"
-Documentation = "https://github.com/your-org/contsg#readme"
-Repository = "https://github.com/your-org/contsg"
+Homepage = "https://github.com/seqml/ConTSG-Bench"
+Documentation = "https://github.com/seqml/ConTSG-Bench#readme"
+Repository = "https://github.com/seqml/ConTSG-Bench"
 
 [tool.setuptools.packages.find]
 where = ["."]
