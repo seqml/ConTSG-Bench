@@ -3,8 +3,8 @@
   "versions": [
     {
       "version": "v2026.03.04-hfckpt2",
-      "release_date": "2026-03-04",
-      "hash": "sha256:c5f563d4b217053a6436ce7497faac99cbaa35a9400eed8fb7a8990938509af0",
+      "release_date": "2026-03-06",
+      "hash": "sha256:b02a9f939fb8e164024568be3992545fb5af0cc7fea53f6efdbeff32a99fe8e6",
       "n_models": 10,
       "n_datasets": 10,
       "n_metrics": 15,

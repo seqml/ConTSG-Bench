@@ -2,8 +2,8 @@
 Model metadata registry for the ConTSG-Bench leaderboard.
 
 Maps each benchmark model to its type and metadata for the model cards table.
-Fields like ``org``, ``paper_link``, ``code_link``, and ``params`` use
-placeholder values and should be filled in before public release.
+Fields like ``org``, ``paper_link``, ``code_link``, and ``params`` capture
+leaderboard metadata for built-in models.
 """
 
 from __future__ import annotations

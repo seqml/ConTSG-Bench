@@ -3,7 +3,7 @@ model:
   model_type: diffusion
   native_condition: attribute
   org: ConTSG
-  code_link: "https://github.com/GritLs/contsg/blob/main/contsg/models/timeweaver.py"
+  code_link: "https://github.com/seqml/ConTSG-Bench/blob/main/contsg/models/timeweaver.py"
   model_link: "https://huggingface.co/mldi-lab/ConTSG-Bench-Checkpoints"
   ckpt_scope: ["synth-u", "synth-m"]
   notes: "Reproduced by the ConTSG team (unofficial re-implementation)."
