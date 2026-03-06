@@ -217,8 +217,8 @@ results:
 ### Step 1: Fork the repository
 
 ```bash
-git clone https://github.com/<your-user-or-org>/contsg.git
-cd contsg
+git clone https://github.com/<your-user-or-org>/ConTSG-Bench.git
+cd ConTSG-Bench
 git checkout -b add-my-model-submission
 ```
 

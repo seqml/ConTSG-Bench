@@ -5,8 +5,8 @@ Thanks for your interest in contributing.
 ## Development Setup
 
 ```bash
-git clone https://github.com/<your-user-or-org>/contsg.git
-cd contsg
+git clone https://github.com/seqml/ConTSG-Bench.git
+cd ConTSG-Bench
 uv sync --extra full --extra dev
 ```
 

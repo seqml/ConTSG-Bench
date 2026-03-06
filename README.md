@@ -124,8 +124,8 @@ ConTSG-Bench benchmarks **11 representative generation models** spanning all thr
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/contsg.git
-cd contsg
+git clone https://github.com/seqml/ConTSG-Bench.git
+cd ConTSG-Bench
 
 # Install full runtime + development tools (recommended)
 uv sync --extra full --extra dev
