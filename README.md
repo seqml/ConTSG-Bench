@@ -1,6 +1,6 @@
 # ConTSG-Bench: A Unified Benchmark for Conditional Time Series Generation
 
-[![arXiv](https://img.shields.io/badge/arXiv-2506.XXXXX-B31B1B?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2506.XXXXX)
+[![arXiv](https://img.shields.io/badge/arXiv-2603.04767-B31B1B?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2603.04767)
 [![HuggingFace Space](https://img.shields.io/badge/HuggingFace-Space-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/spaces/mldi-lab/ConTSG-Bench-Leaderboard)
 [![HuggingFace Dataset](https://img.shields.io/badge/HuggingFace-Dataset-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/datasets/mldi-lab/ConTSG-Bench-Datasets)
 [![HuggingFace Checkpoints](https://img.shields.io/badge/HuggingFace-Checkpoints-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/mldi-lab/ConTSG-Bench-Checkpoints)
