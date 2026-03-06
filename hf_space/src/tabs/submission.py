@@ -150,10 +150,13 @@ def create_submission_tab(data: SnapshotData) -> gr.Blocks:
 
 If you use ConTSG-Bench in your research, please cite:
 
+Paper: https://arxiv.org/abs/2603.04767
+
 ```bibtex
-@article{contsg2026,
-  title={ConTSG-Bench: A Comprehensive Benchmark for Conditional Time Series Generation},
-  author={ConTSG Team},
+@article{contsgbench2026,
+  title={ConTSG-Bench: A Unified Benchmark for Conditional Time Series Generation},
+  author={Shaocheng Lan and Shuqi Gu and Zhangzhi Xiong and Kan Ren},
+  journal={arXiv preprint arXiv:2603.04767},
   year={2026}
 }
 ```
