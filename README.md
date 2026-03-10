@@ -69,6 +69,8 @@ Dataset release: **[ConTSG-Bench Dataset on Hugging Face](https://huggingface.co
 
 Checkpoint release (current public scope: `synth-u`, `synth-m`): **[ConTSG-Bench Checkpoints on Hugging Face](https://huggingface.co/mldi-lab/ConTSG-Bench-Checkpoints)**
 
+CTTP resources in the checkpoint release do **not** mirror the upstream LongCLIP text encoder. To reproduce the public setup, download the exact upstream LongCLIP model `zer0int/LongCLIP-GmP-ViT-L-14` separately and point `pretrain_model_path` (or `LONGCLIP_ROOT` if a released CTTP `model_configs.yaml` uses that placeholder) to that local model directory. Do **not** substitute the original `BeichenZhang/LongCLIP-L`; the released CTTP resources were checked against the GmP fine-tuned LongCLIP variant. See `configs/README.md` for direct download commands.
+
 ## Supported Models
 
 ConTSG-Bench benchmarks **11 representative generation models** spanning all three conditioning modalities:

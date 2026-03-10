@@ -68,6 +68,10 @@ class ConfigLoader:
         """Load configuration from a single YAML file."""
         return ExperimentConfig.from_yaml(path)
 
+    def _get_generator_config_path(self, dataset: str, model: str) -> Path:
+        """Return the required generator config path for dataset+model mode."""
+        return self.config_dir / "generators" / f"{model}_{dataset}.yaml"
+
     def from_args(
         self,
         dataset: str,
@@ -101,79 +105,41 @@ class ConfigLoader:
         Returns:
             ExperimentConfig instance
         """
-        # Start with dataset preset
-        config_dict: dict[str, Any] = {
+        generator_config_path = self._get_generator_config_path(dataset, model)
+        if not generator_config_path.exists():
+            raise FileNotFoundError(
+                f"Required generator config not found: {generator_config_path}. "
+                f"Use --config {generator_config_path} after creating it."
+            )
+
+        config_dict = self.from_yaml(generator_config_path).model_dump(mode="python")
+
+        overrides: dict[str, Any] = {
             "seed": seed,
             "device": device,
             "output_dir": str(output_dir),
         }
 
-        # Build data config
-        data_config: dict[str, Any] = {"name": dataset}
-
-        # Get dataset preset if available
-        if dataset in DATASET_PRESETS:
-            data_config.update(DATASET_PRESETS[dataset])
-
-        # Set data folder
         if data_folder:
-            data_config["data_folder"] = str(data_folder)
-        else:
-            # Default path pattern
-            data_config["data_folder"] = f"./datasets/{dataset}"
-
-        # Try to load dataset-specific config
-        dataset_config_path = self.config_dir / "datasets" / f"{dataset}.yaml"
-        if dataset_config_path.exists():
-            with open(dataset_config_path, "r") as f:
-                dataset_override = yaml.safe_load(f) or {}
-                data_config = deep_merge(data_config, dataset_override.get("data", {}))
-
-        config_dict["data"] = data_config
-
-        # Build model config
-        model_config: dict[str, Any] = {"name": model}
-
-        # Try to load model-specific config
-        model_config_paths = [
-            self.config_dir / "generators" / f"{model}.yaml",
-            self.config_dir / "models" / f"{model}.yaml",  # legacy fallback
-        ]
-        for model_config_path in model_config_paths:
-            if not model_config_path.exists():
-                continue
-            with open(model_config_path, "r") as f:
-                model_override = yaml.safe_load(f) or {}
-                model_config = deep_merge(model_config, model_override.get("model", {}))
-            break
-
-        # Apply model-specific kwargs
-        for key, value in kwargs.items():
-            if value is not None and key not in ["dataset", "model", "data_folder", "clip_folder"]:
-                model_config[key] = value
-
-        config_dict["model"] = model_config
-
-        # Build train config
-        train_config: dict[str, Any] = {}
-        if epochs is not None:
-            train_config["epochs"] = epochs
-        if batch_size is not None:
-            train_config["batch_size"] = batch_size
-        if lr is not None:
-            train_config["lr"] = lr
-
-        if train_config:
-            config_dict["train"] = train_config
-
-        # Build eval config
-        eval_config: dict[str, Any] = {}
+            overrides.setdefault("data", {})["data_folder"] = str(data_folder)
         if clip_folder:
-            eval_config["clip_model_path"] = str(clip_folder)
-        if eval_config:
-            config_dict["eval"] = eval_config
+            overrides.setdefault("eval", {})["clip_model_path"] = str(clip_folder)
+        if epochs is not None:
+            overrides.setdefault("train", {})["epochs"] = epochs
+        if batch_size is not None:
+            overrides.setdefault("train", {})["batch_size"] = batch_size
+        if lr is not None:
+            overrides.setdefault("train", {})["lr"] = lr
 
-        return ExperimentConfig(**config_dict)
+        model_overrides = {
+            key: value
+            for key, value in kwargs.items()
+            if value is not None and key not in ["dataset", "model", "data_folder", "clip_folder"]
+        }
+        if model_overrides:
+            overrides.setdefault("model", {}).update(model_overrides)
+
+        return ExperimentConfig(**deep_merge(config_dict, overrides))
 
     def load_with_overrides(
         self,

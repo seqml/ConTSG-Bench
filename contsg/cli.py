@@ -214,19 +214,22 @@ def train(
     else:
         # Apply debug mode
         actual_epochs = 10 if debug else epochs
-
-        cfg = loader.from_args(
-            dataset=dataset,
-            model=model,
-            data_folder=str(data_folder) if data_folder else None,
-            clip_folder=str(clip_folder) if clip_folder else None,
-            epochs=actual_epochs,
-            batch_size=batch_size,
-            lr=lr,
-            seed=seed,
-            device=device,
-            output_dir=str(output_dir),
-        )
+        try:
+            cfg = loader.from_args(
+                dataset=dataset,
+                model=model,
+                data_folder=str(data_folder) if data_folder else None,
+                clip_folder=str(clip_folder) if clip_folder else None,
+                epochs=actual_epochs,
+                batch_size=batch_size,
+                lr=lr,
+                seed=seed,
+                device=device,
+                output_dir=str(output_dir),
+            )
+        except FileNotFoundError as exc:
+            console.print(f"[red]Error:[/red] {exc}")
+            raise typer.Exit(1)
 
     # Apply stages preset if specified
     if stages:

@@ -1,0 +1,149 @@
+seed: 42
+device: cuda:0
+train:
+  stages:
+  - name: ae_pretrain
+    epochs: 200
+    lr: 0.001
+    use_condition: false
+    freeze_modules: []
+    early_stopping_patience: 50
+  - name: finetune
+    epochs: 500
+    lr: 0.001
+    use_condition: true
+    freeze_modules: []
+    load_from_stage: ae_pretrain
+    early_stopping_patience: 50
+  epochs: 700
+  batch_size: 256
+  lr: 0.001
+  weight_decay: 0.0001
+  scheduler: cosine
+  scheduler_params: {}
+  early_stopping_patience: 50
+  gradient_clip_val: 1.0
+  accumulate_grad_batches: 1
+  val_check_interval: 1.0
+  num_workers: 4
+  pin_memory: true
+  limit_train_batches: 1.0
+  limit_val_batches: 1.0
+  limit_test_batches: 1.0
+  num_sanity_val_steps: 2
+  log_grad_norm: true
+  log_param_norm: true
+  log_norm_every_n_steps: 50
+data:
+  name: synth-u
+  data_folder: ./datasets/synth-u
+  n_var: 1
+  seq_length: 128
+  normalize: false
+  train_split: 0.8
+  val_split: 0.1
+model:
+  name: t2s
+  channels: 64
+  layers: 4
+  nheads: 4
+  dropout: 0.1
+  patch_size: 2
+  mlp_ratio: 2.0
+  flow_steps: 10
+  cfg_scale: 9.0
+  ae:
+    num_hiddens: 128
+    num_residual_layers: 2
+    num_residual_hiddens: 256
+    embedding_dim: 64
+condition:
+  text:
+    enabled: true
+    input_dim: 1024
+    embedding_key: cap_emb
+    dropout: 0.0
+    cfg_scale: 1.0
+  attribute:
+    enabled: false
+    continuous_dim: 0
+    discrete_configs: []
+    output_dim: 128
+    dropout: 0.0
+  label:
+    enabled: false
+    num_classes: 10
+    output_dim: 64
+  fusion: concat
+  condition_dropout: 0.0
+eval:
+  n_samples: 10
+  metrics:
+  - dtw
+  - wape
+  - ed
+  - crps
+  - acd
+  - sd
+  - kd
+  - mdd
+  - fid
+  - sfd
+  - jftsd
+  - prdc_f1
+  - joint_prdc_f1
+  - cttp
+  - disc_auc
+  batch_size: 128
+  save_samples: true
+  sampler: ddim
+  display_interval: 10
+  clip_config_path: ./configs/cttp/cttp_synth-u.yaml
+  clip_model_path: ./checkpoints/cttp/<CTTP_CHECKPOINT>.ckpt
+  cache_folder: ./cache/synth-u
+  use_longalign: false
+  reference_split: train
+  disc_auc:
+    k_folds: 5
+    epochs: 5
+    batch_size: 128
+    lr: 0.001
+    weight_decay: 0.0001
+    hidden_channels: 128
+    num_layers: 3
+    dropout: 0.1
+    seed: 42
+    num_workers: 0
+  prdc:
+    k: 5
+    max_samples: 5000
+    seed: 0
+    metric: euclidean
+    backend: auto
+    knn_chunk_size: 4096
+    joint_enable: true
+    joint_weights:
+      ts: 1.0
+      text: 1.0
+    joint_normalize: standard
+  segment_classifier:
+    enable: false
+    segment_len: 128
+    n_segments: 3
+    seed: 42
+  acd_max_lag: 50
+  mdd_bins: 32
+  use_cache: false
+  cache_file: predictions_cache.pkl
+  viz:
+    enable: true
+    k_cases: 20
+    max_vars: 8
+    ncols: 5
+    seed: 42
+    dpi: 200
+    alpha: 0.25
+    figsize_per_subplot:
+    - 3.0
+    - 2.0
+    output_type: pdf
