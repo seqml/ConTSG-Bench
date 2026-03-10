@@ -160,3 +160,4 @@ hf_space/data/snapshots/
 # Internal documentation (not for open source release)
 AGENTS.md
 docs/hf_frontend_framework.md
+docs/_private/
