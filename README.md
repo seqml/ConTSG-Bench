@@ -8,6 +8,10 @@
 
 *Conditional time series generation with varying conditioning modalities (text, attribute, class label) and semantic abstraction levels (morphological vs. conceptual).*
 
+## News
+
+- **🎉 May 2026** — ConTSG-Bench has been accepted at **ICML 2026**!
+
 ---
 
 > **Call for Models & Datasets** -- ConTSG-Bench is an **open and evolving** benchmark. We welcome the community to submit new models and datasets to the leaderboard. See the **[Submission Guide](docs/submission_guide.md)** for details.
