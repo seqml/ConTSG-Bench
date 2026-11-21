@@ -99,6 +99,9 @@ Measures practical quality via sample-level distances.
 | `ed` | ED | Lower is better |
 | `wape` | WAPE | Lower is better |
 
+WAPE uses each sample's valid time steps when `ts_len` is provided. When sequence lengths are
+omitted, WAPE uses the full time axis.
+
 **Notes:**
 - You do not need to report all 15 metrics. The leaderboard displays a "coverage" score showing what fraction of metrics you reported.
 - Metric IDs use dot notation for nested metrics (e.g., `prdc_f1.precision`, not `prdc_f1_precision`).

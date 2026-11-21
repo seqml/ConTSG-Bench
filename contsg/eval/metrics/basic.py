@@ -133,7 +133,7 @@ class WAPEMetric(BaseMetric):
         Accumulate WAPE components from batch.
 
         Args:
-            batch_data: Must contain 'pred' (B, L, F) and 'ts' (B, L, F)
+            batch_data: Contains 'pred' and 'ts' (B, L, F) and optionally 'ts_len' (B,)
         """
         pred: Tensor = batch_data["pred"]
         ts: Tensor = batch_data["ts"]
@@ -141,13 +141,18 @@ class WAPEMetric(BaseMetric):
         pred_np = pred.cpu().numpy()  # (B, L, F)
         ts_np = ts.cpu().numpy()  # (B, L, F)
 
-        n_features = pred_np.shape[2]
+        lengths = batch_data.get("ts_len")
+        if lengths is not None:
+            valid = np.arange(ts_np.shape[1])[None, :] < lengths.cpu().numpy()[:, None]
+            pred_np, ts_np = pred_np[valid], ts_np[valid]
+
+        n_features = pred_np.shape[-1]
         feature_absolute_errors = []
         feature_actual_sums = []
 
         for feature_idx in range(n_features):
-            pred_feature = pred_np[:, :, feature_idx]  # (B, L)
-            ts_feature = ts_np[:, :, feature_idx]  # (B, L)
+            pred_feature = pred_np[..., feature_idx]
+            ts_feature = ts_np[..., feature_idx]
 
             # Sum of absolute differences
             absolute_diff = np.abs(ts_feature - pred_feature)
